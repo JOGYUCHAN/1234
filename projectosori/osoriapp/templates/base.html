@@ -12,14 +12,17 @@
 
     <title>SoftWear</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="{% static 'vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet" type="text/css">
+    <!-- Custom fonts for this template -->
+    <link href="{%static 'vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{%static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="{%static 'vendor/datatables/dataTables.bootstrap4.min.css'%}" rel="stylesheet">
 
 </head>
 
@@ -71,16 +74,15 @@
 
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item active">
-
-                <a class="nav-link" href="fashionboard.html">
+            <li class="nav-item">
+                <a class="nav-link" href="/fashionboard.html">
                     
                     <span>패션 게시판</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="anonyboard.html">
+            <li class="nav-item active">
+                <a class="nav-link" href="/anonyboard.html">
                    
                     <span>익명 게시판</span></a>
             </li>
@@ -101,9 +103,14 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">패션 코디:</h6>
-                        <a class="collapse-item" href="login.html">남자 패션 코디</a>
-                        <a class="collapse-item" href="register.html">여자 패션 코디</a>
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
             </li>
@@ -115,6 +122,7 @@
 
         </ul>
         <!-- End of Sidebar -->
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -125,9 +133,11 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
+                    <form class="form-inline">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </form>
 
                     <!-- Topbar Search -->
                     <form
@@ -325,66 +335,27 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                  <!-- Begin Page Content -->
+                <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">패션 게시판</h1>
+                {% block content %}
+                
+                {% endblock %}
 
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">게시글 목록</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th width='70%'> 글 제목</th>
-                                            <th>작성날짜</th>
-                                            <th>작성자</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        {% for post in freeposts %}
-                                        <tr>
-                                            <td><a href="{% url 'freedetail' post.id %}">{{ post.title }}</a></td>
-                                            <td>{{ post.date }}</td>
-                                            <td>{{ post.author.username }}</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'freepostcreate'%}" class="btn btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-flag"></i>
-                        </span>
-                        <span class="text">글쓰기</span>
-                    </a>
-                    {% endif %}
                 </div>
                 <!-- /.container-fluid -->
 
             </div>
+            <!-- End of Main Content -->
 
-            
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2020</span>
-                        
                     </div>
                 </div>
             </footer>
-            
             <!-- End of Footer -->
 
         </div>
@@ -417,24 +388,22 @@
             </div>
         </div>
     </div>
-
     <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{% static 'js/sb-admin-2.min.js'%}"></script>
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
 
     <!-- Page level plugins -->
-    <script src="{% static 'vendor/chart.js/Chart.min.js'%}"></script>
+    <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{% static 'js/demo/chart-area-demo.js'%}"></script>
-    <script src="{% static 'js/demo/chart-pie-demo.js'%}"></script>
-    <script src="{% static 'js/demo/chart-bar-demo.js'%}"></script>
+    <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
 
 </body>
 

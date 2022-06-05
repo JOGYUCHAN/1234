@@ -21,7 +21,7 @@ def logout(request):
     auth.logout(request)
     return redirect('home')
 
-def signup(request):
+def register(request):
     if request.method == "POST":
         if request.POST['password'] == request.POST['repeat']:
             # 회원가입
