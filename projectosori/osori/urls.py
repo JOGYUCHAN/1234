@@ -24,7 +24,13 @@ urlpatterns = [
     path('',views.home,name='home'),
     path('anonyboard.html', views.annonyboard,name='annoyboard'),
     path('fashionboard.html', views.fashionboard,name='fashionboard'),
+    path('postcreate', views.postcreate,name='postcreate'),
+    path('detail/<int:post_id>', views.detail,name='detail'),
+    path('new_comment/<int:post_id>', views.new_comment,name='new_comment'),
+    path('freepostcreate', views.freepostcreate,name='freepostcreate'),
+    path('freedetail/<int:post_id>', views.freedetail,name='freedetail'),
+    path('new_freecomment/<int:post_id>', views.new_freecomment,name='new_freecomment'),
     path('login.html', accounts_views.login, name='login'),
     path('logout.html', accounts_views.logout, name='logout'),
+    path('register.html', accounts_views.register, name='register'),
 ]
-
